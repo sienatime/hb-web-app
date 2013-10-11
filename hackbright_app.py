@@ -9,9 +9,67 @@ def get_student_by_github(github):
     row = DB.fetchone()
     print """\
 Student: %s %s
-Github account: %s"""%(row[0], row[1], row[2])
+Github account: %s""" % (row[0], row[1], row[2])
 
-def connect_to_db():
+def get_project_by_title(title):
+    query = """SELECT title, description, max_grade FROM projects WHERE title = ?"""
+    DB.execute(query, (title,))
+    row = DB.fetchone()
+    print """\
+Title: %s 
+Description: %s
+Maximum Grade = %d
+""" % (row[0], row[1], row[2])
+
+def get_grade_by_student_and_project(first_name, last_name, project_title):
+    query = """SELECT grade FROM grades 
+    INNER JOIN students
+    ON grades.student_github = students.github
+    WHERE students.first_name = ? AND students.last_name = ? AND project_title = ?"""
+    DB.execute(query, (first_name, last_name, project_title))
+    row = DB.fetchone()
+    print """\
+Student: %s %s
+Project: %s
+Grade = %d
+""" % (first_name, last_name, project_title, row[0])
+
+def show_grade_by_student(github):
+    query = """SELECT project_title, grade from grades WHERE student_github = ?"""
+    DB.execute(query, (github,))
+    while True:
+        row = DB.fetchone()
+        if row == None:
+            break
+        print """\
+Student Github: %s
+Project: %s
+Grade: %s
+"""%(github, row[0], row[1])
+
+
+def make_new_student(first_name, last_name, github):
+    query = """INSERT into Students values (?,?,?)"""
+    DB.execute(query, (first_name,last_name, github))
+
+    CONN.commit()
+    print "Successfully added student: %s %s" %(first_name, last_name) 
+
+def make_new_project(title, description, max_grade):
+    query = """INSERT into projects values (?, ?, ?)"""
+    DB.execute(query, (title, description, max_grade))
+
+    CONN.commit()
+    print "Successfully added project: %s" %(title)
+
+def assign_grade_to_student(github, project_title, grade):
+    query = """INSERT into grades values (?,?,?)"""
+    DB.execute(query, (github, project_title, grade))
+
+    CONN.commit()
+    print "Successfully added grade: %s"%grade
+
+def connect_to_db(): 
     global DB, CONN
     CONN = sqlite3.connect("hackbright.db")
     DB = CONN.cursor()
@@ -23,12 +81,29 @@ def main():
         input_string = raw_input("HBA Database> ")
         tokens = input_string.split()
         command = tokens[0]
+        if command in ("new_project", "assign_grade") and len(tokens) > 4:
+            token_str = " "
+            tokens[2] = token_str.join(tokens[2:-1])
+            tokens[3] = tokens[-1]
+            for i in range(4, len(tokens)):
+                tokens.pop()        
         args = tokens[1:]
 
         if command == "student":
             get_student_by_github(*args) 
+        elif command == "project":
+            get_project_by_title(*args)
+        elif command == "grade":
+            get_grade_by_student_and_project(*args)
         elif command == "new_student":
             make_new_student(*args)
+        elif command == "new_project":
+            make_new_project(*args)
+        elif command == "assign_grade":
+            assign_grade_to_student(*args)
+        elif command == "show_grade":
+            show_grade_by_student(*args)
+
 
     CONN.close()
 
