@@ -2,8 +2,12 @@ h1,h2,h3,p,body,div,table{
     font-family: Arial;
 }
 
+h2, h3{
+    margin-top: 0;
+}
+
 body{
-    padding: 50px 100px;
+    padding: 10px 50px 50px 50px;
     background-color: #fcfcfc; 
     color: #181818;
 }
@@ -35,10 +39,14 @@ button:hover, input[type=submit]:hover{
 
 h1, .container, #footer, #menu, .content{
     color: #181818;
-    background-color: rgba(232,71,44,0.7);
+    background-color: rgba(232,71,44,0.8);
     padding: 20px;
     border-radius: 20px;
     margin: 10px;
+}
+
+h1{
+    background-color: rgba(193,28,0,0.8);
 }
 
 .container{
@@ -66,4 +74,27 @@ h1, .container, #footer, #menu, .content{
 
 .container form{
     margin-bottom: 30px;
+}
+
+td{
+    padding: 5px 0 5px 5px;
+}
+
+.multifield label{
+    float:left;
+    padding: 3px 0;
+    clear:both;
+}
+
+.multifield input[type=text]{
+    float:right;
+}
+
+.multifield input[type=submit]{
+    float: right;
+    margin-top: 5px;
+}
+
+.clearfix{
+    clear: both;
 }

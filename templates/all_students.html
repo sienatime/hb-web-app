@@ -1,10 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="content">
-    <h1>Students</h1>
+<h1>Students</h1>
+<div class="container">
+    <h3>All students</h3>
             {% for row in student_data %}
                 <a href="{{ "/student?student=" + row[2] }}">{{row[0]}} {{row[1]}}</a><br />
             {% endfor %}
+</div>
+<div class="container">
+ <h3>Create new student</h3>
+        <form action="/newstudent" class="multifield">
+            <label for="first_name">First Name:</label> <input type="text" name="first_name" /><br />
+            <label for="last_name">Last Name:</label> <input type="text" name="last_name" /><br />
+            <label for="github">Github Account:</label> <input type="text" name="github" /><br />
+            <div class="clearfix"></div>
+            <input type="submit">
+        </form>
 
 </div>
 {% endblock %}
