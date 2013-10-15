@@ -93,6 +93,12 @@ def get_all_students():
     rows = hackbright_app.get_all_students()
     return render_template("all_students.html", student_data = rows)
 
+@app.route("/allprojects")
+def get_all_projects():
+    hackbright_app.connect_to_db()
+    rows = hackbright_app.get_all_projects()
+    return render_template("all_projects.html", project_data = rows)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

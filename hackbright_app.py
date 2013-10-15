@@ -38,6 +38,12 @@ def get_all_students():
     rows = DB.fetchall()
     return rows
 
+def get_all_projects():
+    query = """SELECT * FROM Projects"""
+    DB.execute(query,)
+    rows = DB.fetchall()
+    return rows
+
 def get_students_and_grades_by_project(project_title):
     query = """SELECT student_github, grade FROM Grades WHERE project_title=?"""
     DB.execute(query, (project_title,))

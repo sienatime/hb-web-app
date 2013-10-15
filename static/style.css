@@ -4,7 +4,7 @@ h1,h2,h3,p,body,div,table{
 
 body{
     padding: 50px 100px;
-    background-color: #821F3E; 
+    background-color: #fcfcfc; 
     color: #181818;
 }
 
@@ -12,13 +12,30 @@ a{
     color: #181818;
 }
 
+a:hover{
+    color: #148bc1;
+}
+
 #body_container{
     width: 850px;
 }
 
+button, input[type=submit]{
+    background-color: #37afe5;
+    color: #dfe1e5;
+    border: 2px #148bc1 solid;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+button:hover, input[type=submit]:hover{
+    background-color: #148bc1;
+}
+
 h1, .container, #footer, #menu, .content{
     color: #181818;
-    background-color: rgba(201,68,111,0.5);
+    background-color: rgba(232,71,44,0.7);
     padding: 20px;
     border-radius: 20px;
     margin: 10px;
@@ -27,6 +44,19 @@ h1, .container, #footer, #menu, .content{
 .container{
     float: left;
     width:360px;
+}
+
+#menu{
+    padding: 10px;
+}
+
+#menu ul{
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+#menu li{
+    display: inline;
 }
 
 #footer{
