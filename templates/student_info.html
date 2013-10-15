@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+        <h1>Student: {{last_name}}, {{first_name}}</h1>
+        <h2>Github: {{github}}</h2>
+
+        <p>Grade student on existing project</p>
+        <form action="/student">
+            <input type="hidden" name="student" value="{{github}}"/>
+            <label for="project_title">Title:</label> <input name="project_title" />
+            <label for="grade">Grade:</label> <input name="grade" />
+            <input type="submit">
+        </form>
+        <table>
+
+        {% if request.args.get("project_title") and request.args.get("grade") %}
+            <p><em>Successfully added grade of {{request.args.get("grade")}} for project {{request.args.get("project_title")}}</em></p>
+        {% endif %}
+            
+            <tr><th>Project</th><th>Grade</th></tr>
+            {% for row in grade_rows %}
+                <tr>
+                    <td><a href="{{ "/project?project_title=" + row[0] }}">{{row[0]}}</a></td>
+                    <td>{{row[1]}}</td></tr>
+            {% endfor %}
+        </table>
+</div>
+{% endblock %}

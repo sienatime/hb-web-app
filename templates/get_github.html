@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+        <h1>Hackbright Student Database</h1>
+        <div id="student" class="container">
+        <h2>Students</h2>
+        <form action="/student">
+            <label for="student">Look up student via github id:</label><br />
+            <input type="text" name="student" />
+            <input type="submit">
+        </form>
+
+
+
+        <p>Create new student:</p>
+        <form action="/newstudent" class="multifield">
+            <label for="first_name">First Name:</label> <input type="text" name="first_name" /><br />
+            <label for="last_name">Last Name:</label> <input type="text" name="last_name" /><br />
+            <label for="github">Github Account:</label> <input type="text" name="github" /><br />
+            <input type="submit">
+        </form>
+    </div>
+    <div id="project" class="container">
+        <h2>Projects</h2>
+        <form action="/project">
+            <label for="project_title">Look up project name: </label><br />
+            <input type="text" name="project_title" />
+            <input type="submit">
+        </form>
+
+        <p>Create new project:</p>
+        <form action="/newproject" class="multifield">
+            <label for="title">Title:</label> <input type="text" name="title" /><br />
+            <label for="description">Description:</label> <input type="text" name="description" /><br />
+            <label for="max_grade">Max Grade:</label> <input type="text" name="max_grade" /><br />
+            <input type="submit">
+        </form>
+    </div>
+
+
+{% endblock %}

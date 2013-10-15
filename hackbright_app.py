@@ -7,15 +7,13 @@ def get_student_by_github(github):
     query = """SELECT first_name, last_name, github FROM Students WHERE github = ?"""
     DB.execute(query, (github,))
     row = DB.fetchone()
-    print """\
-Student: %s %s
-Github account: %s""" % (row[0], row[1], row[2])
+    return row
 
 def get_project_by_title(title):
     query = """SELECT title, description, max_grade FROM projects WHERE title = ?"""
     DB.execute(query, (title,))
     row = DB.fetchone()
-    print """\
+    return """\
 Title: %s 
 Description: %s
 Maximum Grade = %d
@@ -28,46 +26,52 @@ def get_grade_by_student_and_project(first_name, last_name, project_title):
     WHERE students.first_name = ? AND students.last_name = ? AND project_title = ?"""
     DB.execute(query, (first_name, last_name, project_title))
     row = DB.fetchone()
-    print """\
+    return """\
 Student: %s %s
 Project: %s
 Grade = %d
 """ % (first_name, last_name, project_title, row[0])
 
+def get_all_students():
+    query = """SELECT * FROM Students"""
+    DB.execute(query,)
+    rows = DB.fetchall()
+    return rows
+
+def get_students_and_grades_by_project(project_title):
+    query = """SELECT student_github, grade FROM Grades WHERE project_title=?"""
+    DB.execute(query, (project_title,))
+    rows = DB.fetchall()
+    return rows
+
+
 def show_grade_by_student(github):
     query = """SELECT project_title, grade from grades WHERE student_github = ?"""
     DB.execute(query, (github,))
-    while True:
-        row = DB.fetchone()
-        if row == None:
-            break
-        print """\
-Student Github: %s
-Project: %s
-Grade: %s
-"""%(github, row[0], row[1])
-
+    rows = DB.fetchall()
+    # return rows
+    return rows
 
 def make_new_student(first_name, last_name, github):
     query = """INSERT into Students values (?,?,?)"""
     DB.execute(query, (first_name,last_name, github))
 
     CONN.commit()
-    print "Successfully added student: %s %s" %(first_name, last_name) 
+    return "Successfully added student: %s %s" %(first_name, last_name) 
 
 def make_new_project(title, description, max_grade):
     query = """INSERT into projects values (?, ?, ?)"""
     DB.execute(query, (title, description, max_grade))
 
     CONN.commit()
-    print "Successfully added project: %s" %(title)
+    return "Successfully added project: %s" %(title)
 
 def assign_grade_to_student(github, project_title, grade):
     query = """INSERT into grades values (?,?,?)"""
     DB.execute(query, (github, project_title, grade))
 
     CONN.commit()
-    print "Successfully added grade: %s"%grade
+    return "Successfully added grade: %s"%grade
 
 def connect_to_db(): 
     global DB, CONN

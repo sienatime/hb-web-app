@@ -1,0 +1,39 @@
+h1,h2,h3,p,body,div,table{
+    font-family: Arial;
+}
+
+body{
+    padding: 50px 100px;
+    background-color: #821F3E; 
+    color: #181818;
+}
+
+a{
+    color: #181818;
+}
+
+#body_container{
+    width: 850px;
+}
+
+h1, .container, #footer, #menu, .content{
+    color: #181818;
+    background-color: rgba(201,68,111,0.5);
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.container{
+    float: left;
+    width:360px;
+}
+
+#footer{
+    clear: both;
+    font-style: italic;
+}
+
+.container form{
+    margin-bottom: 30px;
+}
