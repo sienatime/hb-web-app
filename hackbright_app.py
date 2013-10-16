@@ -74,6 +74,7 @@ def make_new_project(title, description, max_grade):
 
 def assign_grade_to_student(github, project_title, grade):
     query = """INSERT into grades values (?,?,?)"""
+    print "hackbright_app.py", github, project_title, grade
     DB.execute(query, (github, project_title, grade))
 
     CONN.commit()

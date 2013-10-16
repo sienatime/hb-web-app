@@ -20,8 +20,8 @@
 </div>
 <div class="container">
     <h3>Grade student on existing project</h3>
-        <form action="/student" class="multifield">
-            <input type="hidden" name="student" value="{{github}}"/>
+        <form action="/grade" method="POST" class="multifield">
+            <input type="hidden" name="github" value="{{github}}"/>
             <label for="project_title">Title:</label> <input type="text" name="project_title" />
             <label for="grade">Grade:</label> <input type="text" name="grade" />
             <div class="clearfix"></div>

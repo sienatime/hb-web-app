@@ -18,7 +18,7 @@
 <div class="container">
 
         <h3>Grade student on existing project</h3>
-        <form action="/project" class="multifield">
+        <form action="/grade" method="POST" class="multifield">
             <label for="github">Github Account:</label> <input type="text" name="github" />
             <input type="hidden" name="project_title" value="{{project_title}}"/>
             <label for="grade">Grade:</label> <input type="text" name="grade" />
